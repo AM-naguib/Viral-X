@@ -72,7 +72,6 @@
                 @csrf
                 <div class="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
                     <div class="text-green-400">
-
                         @include('back.dashboard.inc.message')
                     </div>
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">

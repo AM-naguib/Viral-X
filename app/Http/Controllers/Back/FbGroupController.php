@@ -31,7 +31,7 @@ class FbGroupController extends Controller
         FbGroup::where("user_id", $user_id)->delete();
 
         $accessToken = auth()->user()->accessTokens()->where("type", "facebook")->first()->token;
-        StoreGroups::dispatch($user_id, $accessToken)->onQueue('high_priority')->priority(10);
+        StoreGroups::dispatch($user_id, $accessToken);
         return to_route('admin.fbgroups.show');
     }
 
