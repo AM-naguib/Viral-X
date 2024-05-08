@@ -24,7 +24,7 @@ class FbPageController extends Controller
     {
         $user_id = auth()->user()->id;
         FbPage::where("user_id", $user_id)->delete();
-        StorePages::dispatch($user_id)->onQueue('high_priority')->priority(10);
+        StorePages::dispatch($user_id);
         return to_route('admin.social-accounts');
 
     }
