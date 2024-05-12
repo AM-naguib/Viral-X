@@ -29,30 +29,6 @@ class FbPageController extends Controller
 
     }
 
-    // public function storePages($url)
-    // {
-    //     $data = $this->makeRequest($url);
-    //     $pages = $data['data'];
-
-    //     foreach ($pages as $page) {
-    //         $nPage = new FbPage();
-    //         $nPage->name = $page["name"];
-    //         $nPage->page_id = $page["id"];
-    //         $nPage->user_id = auth()->user()->id;
-    //         $nPage->access_token = $page["access_token"];
-    //         $nPage->save();
-    //     }
-    //     if (isset ($data['paging']['next'])) {
-    //         $next = $data['paging']['next'];
-    //         $this->storePages($next);
-    //     }
-    // }
-    // public function makeRequest($url)
-    // {
-
-    //     $response = Http::get($url);
-    //     return $response->json();
-    // }
 
     public function pagesSendPost(Request $request)
     {
@@ -69,7 +45,7 @@ class FbPageController extends Controller
         $user_id = auth()->user()->id;
         $pages = $request->pages;
         $content = $request->content;
-        PostInPages::dispatch($user_id, $pages, $imageLink,$content)->onQueue('high_priority')->priority(10);
+        PostInPages::dispatch($user_id, $pages, $imageLink,$content);
         return redirect()->route("admin.history")->with("success", "Posts sent successfully");
 
     }

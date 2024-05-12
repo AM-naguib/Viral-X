@@ -77,6 +77,7 @@
                         </span>
                     </a>
                 </li>
+
                 {{-- Posts --}}
                 <li class="nav-item">
                     <span class="nav-link collapsed d-flex justify-content-between align-items-center"
@@ -106,9 +107,9 @@
                         <ul class="flex-column nav">
                             <li class="nav-item"><a class="nav-link" href="{{ route('admin.posts.pages-add-post') }}">
                                     <span class="sidebar-text">Post in FB Pages</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('admin.posts.groups-add-post') }}">
+                            {{-- <li class="nav-item"><a class="nav-link" href="{{ route('admin.posts.groups-add-post') }}">
                                     <span class="sidebar-text">Post in FB Groups</span></a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item"><a class="nav-link" href="{{ route('admin.posts.twitter-add-post') }}">
                                     <span class="sidebar-text">Post in Twitter</span></a>
                             </li>

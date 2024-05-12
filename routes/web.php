@@ -48,16 +48,17 @@ Route::middleware('auth')->prefix('dashboard')->name('admin.')->group(function (
         Route::get("social-accounts", [SocialAccountController::class, 'index'])->name('social-accounts');
         Route::delete("social-accounts/{id}", [SocialAccountController::class, 'destroy'])->name('social-accounts.destroy');
         // Facebook Group Routes
-        Route::get("social-accounts/get-groups", [FbGroupController::class, 'getGroups'])->name('groups.get');
-        Route::get("social-accounts/show-groups", [FbGroupController::class, 'index'])->name('fbgroups.show');
-        Route::post("posts/groups-send-post", [FbGroupController::class, "groupsSendPost"])->name("posts.groups-send-post");
+        // NOW API FOR GROUPS IS NOT WORKING :(
+        // Route::get("social-accounts/get-groups", [FbGroupController::class, 'getGroups'])->name('groups.get');
+        // Route::get("social-accounts/show-groups", [FbGroupController::class, 'index'])->name('fbgroups.show');
+        // Route::post("posts/groups-send-post", [FbGroupController::class, "groupsSendPost"])->name("posts.groups-send-post");
         // Facebook Page Routes
         Route::get("social-accounts/get-pages", [FbPageController::class, 'getPages'])->name('fbpages.get');
         Route::get("social-accounts/show-pages", [FbPageController::class, 'index'])->name('fbpages.index');
         Route::post("posts/pages-send-post", [FbPageController::class, "pagesSendPost"])->name("posts.pages-send-post");
         // Posts Routes
         Route::get("posts/pages-add-post", [PostController::class, "pagesAddPost"])->name("posts.pages-add-post");
-        Route::get("posts/groups-add-post", [PostController::class, "groupsAddPost"])->name("posts.groups-add-post");
+        // Route::get("posts/groups-add-post", [PostController::class, "groupsAddPost"])->name("posts.groups-add-post");
         Route::get("posts/twitter-add-post", [PostController::class, "twitterAddPost"])->name("posts.twitter-add-post");
         // Twitter Routes
         Route::post("posts/twitter-send-post", [TwitterController::class, "twitterSendPost"])->name("posts.twitter-send-post");
