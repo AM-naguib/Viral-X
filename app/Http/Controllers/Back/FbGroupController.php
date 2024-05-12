@@ -96,7 +96,7 @@ class FbGroupController extends Controller
         $content = $request->content;
         $groups = $request->groups;
         $user_id = auth()->user()->id;
-        PostInGroups::dispatch($user_id, $groups, $content, $imagePath, $imageName)->onQueue('high_priority')->priority(10);
+        PostInGroups::dispatch($user_id, $groups, $content, $imagePath, $imageName);
         return redirect()->route("admin.history")->with("success", "Posts sent successfully");
 
     }

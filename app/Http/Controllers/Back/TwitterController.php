@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Models\History;
 use App\Jobs\PostInTwitter;
 use App\Models\AccessToken;
-use App\Models\History;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -25,7 +26,9 @@ class TwitterController extends Controller
             $imagePath = $request->file("image")->getPathname();
         }
         $user_id = auth()->user()->id;
-        PostInTwitter::dispatch($user_id, $accounts, $content, $imagePath)->onQueue('high_priority')->priority(10);
+
+
+        PostInTwitter::dispatch($user_id, $accounts, $content, $imagePath);
         return redirect()->route("admin.history")->with("success", "Posts Sent Successfully");
     }
 

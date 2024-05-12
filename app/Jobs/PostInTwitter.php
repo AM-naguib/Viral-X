@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\History;
 use App\Models\AccessToken;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Log;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -29,6 +30,7 @@ class PostInTwitter implements ShouldQueue
         $this->accounts = $a;
         $this->content = $c;
         $this->imagePath = $i;
+        Log::info($i);
     }
 
     /**
@@ -53,7 +55,6 @@ class PostInTwitter implements ShouldQueue
         $success = [];
         foreach ($tokens as $token) {
             $twitterAuth = new TwitterOAuth($consumerKey, $consumerSecret, $token->token, $token->token_secret);
-
             if ($imagePath == null) {
                 $postParams = [
                     'text' => "$message"

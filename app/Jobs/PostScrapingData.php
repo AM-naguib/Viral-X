@@ -61,7 +61,7 @@ class PostScrapingData implements ShouldQueue
             'published' => true,
         ])->json();
 
-        // Save In History
+        // Save In History0
         $this->saveHistory($content, $postResponse["id"], $this->page->user_id);
         return $postResponse;
     }
