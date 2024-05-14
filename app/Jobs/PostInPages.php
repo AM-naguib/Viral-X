@@ -41,13 +41,14 @@ class PostInPages implements ShouldQueue
         $accountToken = $this->getAccountToken($this->user_id);
 
         $pagesTokens = $this->getPagesToken($this->pages, $accountToken);
+
+
         $successPosts = $this->makePost($pagesTokens, $this->content, $this->imageLink);
         $this->saveHistory($successPosts, $this->content,$this->user_id);
 
     }
     public function getAccountToken($user_id)
     {
-
         $accessToken = AccessToken::where("user_id", $user_id)->where("type", "facebook")->first();
         return $accessToken->token;
     }
@@ -59,14 +60,17 @@ class PostInPages implements ShouldQueue
         foreach ($ids as $id) {
             $url = "https://graph.facebook.com/v12.0/$id?fields=access_token&access_token=$token";
             $res = $this->makeRequest($url);
+            Log::info($res);
 
             $pagesWithTokens[$res["id"]] = $res['access_token'];
         }
+
         return $pagesWithTokens;
     }
 
     public function makePost($tokens, $message, $photoPath)
     {
+
         $errors = [];
         $success = [];
         foreach ($tokens as $id => $token) {
@@ -81,8 +85,8 @@ class PostInPages implements ShouldQueue
                 ]);
                 $success[] = $postResponse->json()['id'];
             } else {
-                $photoUrl = "https://code-solutions.site/USED-Gift-Card.png";
-
+                $photoUrl = "https://code-solutions.site/assets/img/themesberg-mockup.jpg";
+                Log::info($photoPath);
                 $photoId = $this->photoUpload($id, $token, $photoPath);
                 $postResponse = Http::post("https://graph.facebook.com/$id/feed", [
                     'message' => $message,
@@ -90,7 +94,6 @@ class PostInPages implements ShouldQueue
                     'attached_media' => json_encode([['media_fbid' => $photoId]]),
                     'published' => true,
                 ]);
-                Log::info($photoPath);
                 $success[] = $postResponse->json()['id'];
 
             }
@@ -129,6 +132,7 @@ class PostInPages implements ShouldQueue
             'url' => $photoUrl,
             'published' => false,
         ]);
+
         return $photoUploadResponse->json()['id'];
 
     }
