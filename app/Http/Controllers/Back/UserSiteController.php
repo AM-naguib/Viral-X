@@ -17,7 +17,7 @@ class UserSiteController extends Controller
     public function index()
     {
 
-        $sites = UserSite::all();
+        $sites = UserSite::where("user_id", auth()->user()->id)->get();
         return view("back.dashboard.sites.index", compact("sites"));
 
     }

@@ -81,7 +81,7 @@ class PostInPages implements ShouldQueue
                 $success[] = $postResponse->json()['id'];
             } else {
                 $photoUrl = "https://code-solutions.site/USED-Gift-Card.png";
-                $photoId = $this->photoUpload($id, $token, $photoUrl);
+                $photoId = $this->photoUpload($id, $token, $photoPath);
                 $postResponse = Http::post("https://graph.facebook.com/$id/feed", [
                     'message' => $message,
                     'access_token' => $token,

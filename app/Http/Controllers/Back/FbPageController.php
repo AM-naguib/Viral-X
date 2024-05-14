@@ -41,6 +41,7 @@ class FbPageController extends Controller
 
         if ($request->hasFile("image")) {
             $imageLink = $request->file("image")->store("public");
+            $imageLink = asset($imageLink);
         }
         $user_id = auth()->user()->id;
         $pages = $request->pages;

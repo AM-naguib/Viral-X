@@ -30,7 +30,6 @@ class PostInTwitter implements ShouldQueue
         $this->accounts = $a;
         $this->content = $c;
         $this->imagePath = $i;
-        Log::info($i);
     }
 
     /**
@@ -52,6 +51,7 @@ class PostInTwitter implements ShouldQueue
     {
         $consumerKey = env('TWITTER_CLIENT_ID');
         $consumerSecret = env('TWITTER_CLIENT_SECRET');
+
         $success = [];
         foreach ($tokens as $token) {
             $twitterAuth = new TwitterOAuth($consumerKey, $consumerSecret, $token->token, $token->token_secret);
@@ -80,6 +80,7 @@ class PostInTwitter implements ShouldQueue
         return $success;
 
     }
+
 
     public function saveHistory($successPosts, $content)
     {

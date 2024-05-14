@@ -91,8 +91,6 @@ class FbGroupController extends Controller
             $imagePath = $request->file("image")->getPathname();
             $imageName = $request->file("image")->getClientOriginalName();
         }
-
-
         $content = $request->content;
         $groups = $request->groups;
         $user_id = auth()->user()->id;
@@ -101,53 +99,6 @@ class FbGroupController extends Controller
 
     }
 
-    public function getAccountToken()
-    {
-        $accessToken = AccessToken::where("user_id", auth()->user()->id)->where("type", "facebook")->first()->token;
-        return $accessToken;
-    }
 
-    public function makePost($token, $groups, $content, $imagePath, $imageName)
-    {
-        $success = [];
-        foreach ($groups as $group) {
-            if (!empty($imagePath)) {
-                $postResponse = Http::attach(
-                    'source',
-                    file_get_contents($imagePath),
-                    $imageName
-                )->post("https://graph.facebook.com/{$group}/photos", [
-                            'message' => $content,
-                            'access_token' => $token,
-                            'privacy' => json_encode(['value' => 'EVERYONE'])
-                        ])->json();
-            } else {
-                $postResponse = Http::post("https://graph.facebook.com/{$group}/feed", [
-                    'message' => $content,
-                    'access_token' => $token,
-                ])->json();
-            }
-            if (isset($postResponse["id"])) {
-                $success[] = $postResponse["id"];
-            }
-        }
-
-        return $success;
-    }
-
-
-    public function saveHistory($posts, $content)
-    {
-
-        foreach ($posts as $post) {
-            History::create([
-                "user_id" => auth()->user()->id,
-                "type" => "FaceBook Group",
-                "content" => $content,
-                "post_link" => "https://facebook.com/" . $post
-            ]);
-        }
-
-    }
 
 }
