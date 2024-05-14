@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\History;
 use App\Models\AccessToken;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -81,6 +82,7 @@ class PostInPages implements ShouldQueue
                 $success[] = $postResponse->json()['id'];
             } else {
                 $photoUrl = "https://code-solutions.site/USED-Gift-Card.png";
+
                 $photoId = $this->photoUpload($id, $token, $photoPath);
                 $postResponse = Http::post("https://graph.facebook.com/$id/feed", [
                     'message' => $message,
@@ -88,6 +90,7 @@ class PostInPages implements ShouldQueue
                     'attached_media' => json_encode([['media_fbid' => $photoId]]),
                     'published' => true,
                 ]);
+                Log::info($photoPath);
                 $success[] = $postResponse->json()['id'];
 
             }
