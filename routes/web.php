@@ -97,6 +97,7 @@ Route::name("front.")->group(function () {
     Route::get("/", [HomeController::class, 'index'])->name("index");
     Route::get("contact", [HomeController::class, 'contact'])->name("contact");
     Route::get("pricing", [HomeController::class, 'pricing'])->name("pricing");
+    Route::get("refund-policy", [HomeController::class, 'refundPolicy'])->name("refund-policy");
 });
 
 Route::get("get", function (Request $request) {

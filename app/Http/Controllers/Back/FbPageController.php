@@ -41,12 +41,12 @@ class FbPageController extends Controller
 
         if ($request->hasFile("image")) {
             $imageLink = $request->file("image")->store("public");
-            $imageLink = asset($imageLink);
+            $imageLink = asset("/public/" . $imageLink);
         }
         $user_id = auth()->user()->id;
         $pages = $request->pages;
         $content = $request->content;
-        PostInPages::dispatch($user_id, $pages, $imageLink,$content);
+        PostInPages::dispatch($user_id, $pages, $imageLink, $content);
         return redirect()->route("admin.history")->with("success", "Posts sent successfully");
 
     }

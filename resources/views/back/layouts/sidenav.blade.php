@@ -18,7 +18,6 @@
                             Sign Out
                         </button>
                     </form>
-
                 </div>
             </div>
             <div class="collapse-close d-md-none">
@@ -36,12 +35,12 @@
         <ul class="nav flex-column pt-3 pt-md-0">
             {{-- Logo --}}
             <li class="nav-item">
-                <a href="https://demo.themesberg.com/volt-pro/index.html" class="nav-link d-flex align-items-center">
+                <a href="{{ route('front.index') }}" class="nav-link d-flex align-items-center">
                     <span class="sidebar-icon">
-                        <img src="https://demo.themesberg.com/volt-pro/assets/img/brand/light.svg" height="20"
-                            width="20" alt="Volt Logo"> </span>
+                        <img src="{{ asset('assets/img') }}/logo.png" height="20" width="20" alt="Volt Logo">
+                    </span>
                     <span class="mt-1 sidebar-text">Viral-X
-                        </span></a>
+                    </span></a>
             </li>
             {{-- Dashboard --}}
             <li class="nav-item">

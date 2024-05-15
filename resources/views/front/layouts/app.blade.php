@@ -57,6 +57,8 @@
                                 class="text-gray-300 @yield('pricing') hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Pricing</a>
                             <a href="{{ route('front.contact') }}"
                                 class="text-gray-300 @yield('contact') hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
+                                <a href="{{ route('front.refund-policy') }}"
+                                class="text-gray-300 @yield('refund-policy') hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Refund Policy</a>
                         </div>
                     </div>
                 </div>
