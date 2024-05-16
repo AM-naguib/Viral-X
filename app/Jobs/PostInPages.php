@@ -38,15 +38,15 @@ class PostInPages implements ShouldQueue
      */
     public function handle(): void
     {
-        // $accountToken = $this->getAccountToken($this->user_id);
+        $accountToken = $this->getAccountToken($this->user_id);
 
-        // $pagesTokens = $this->getPagesToken($this->pages, $accountToken);
+        $pagesTokens = $this->getPagesToken($this->pages, $accountToken);
 
 
-        // $successPosts = $this->makePost($pagesTokens, $this->content, $this->imageLink);
-        // $this->saveHistory($successPosts, $this->content, $this->user_id);
+        $successPosts = $this->makePost($pagesTokens, $this->content, $this->imageLink);
+        $this->saveHistory($successPosts, $this->content, $this->user_id);
 
-        Log::info("job done");
+
 
     }
     public function getAccountToken($user_id)
