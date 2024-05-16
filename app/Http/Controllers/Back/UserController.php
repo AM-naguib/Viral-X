@@ -38,13 +38,11 @@ class UserController extends Controller
         $data = $request->validate([
             "name" => "required|string",
             "email" => "required|email|unique:users,email",
-            "password" => "nullable",
+            "password" => "required",
             "role_id" => "required|exists:roles,id",
             "plan_id" => "required|exists:plans,id",
         ]);
-        if($data["password"] != null){
-            $data["password"] = bcrypt($data["password"]);
-        }
+        $data["password"] = bcrypt($data["password"]);
         User::create($data);
         return redirect()->route("admin.users.index")->with("success", "User created successfully");
     }
@@ -69,11 +67,13 @@ class UserController extends Controller
         $data = $request->validate([
             "name" => "required|string",
             "email" => "required|email|unique:users,email,{$user->id}",
-            "password" => "required",
+            "password" => "nullable",
             "role_id" => "required|exists:roles,id",
             "plan_id" => "required|exists:plans,id",
         ]);
-        $data["password"] = bcrypt($data["password"]);
+        if (isset($data["password"])) {
+            $data["password"] = bcrypt($data["password"]);
+        }
         $user->update($data);
         return redirect()->route("admin.users.index")->with("success", "User updated successfully");
     }
