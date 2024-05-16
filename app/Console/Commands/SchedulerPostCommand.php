@@ -88,8 +88,7 @@ class SchedulerPostCommand extends Command
             ]);
             $success[] = $postResponse->json()['id'];
         } else {
-            $photoUrl = "https://code-solutions.site/USED-Gift-Card.png";
-            $photoId = $this->photoUpload($page_id, $token, $photoUrl);
+            $photoId = $this->photoUpload($page_id, $token, $imageUrl);
             $postResponse = Http::post("https://graph.facebook.com/$page_id/feed", [
                 'message' => $content,
                 'access_token' => $token,
@@ -110,6 +109,7 @@ class SchedulerPostCommand extends Command
             'url' => $photoUrl,
             'published' => false,
         ]);
+
         return $photoUploadResponse->json()['id'];
 
     }
