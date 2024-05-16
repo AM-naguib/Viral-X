@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Illuminate\Support\Facades\Storage;
 
 class TwitterController extends Controller
 {
@@ -23,12 +24,15 @@ class TwitterController extends Controller
         $content = $request->content;
         $accounts = $request->accounts;
         if ($request->hasFile("image")) {
-            $imagePath = $request->file("image")->getPathname();
+            $imagePath = $request->file("image")->store("public");
+            $fullPath = Storage::path($imagePath);
+
+            // dd($fullPath);
         }
         $user_id = auth()->user()->id;
 
 
-        PostInTwitter::dispatch($user_id, $accounts, $content, $imagePath);
+        PostInTwitter::dispatch($user_id, $accounts, $content, $fullPath);
         return redirect()->route("admin.history")->with("success", "Posts Sent Successfully");
     }
 
