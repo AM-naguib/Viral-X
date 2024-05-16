@@ -36,7 +36,7 @@ class SchedulerPostCommand extends Command
             foreach ($pages as $page) {
                 $token = $this->getPageAccessToken($page->page_id, $page->user_id);
                 $imageUrl = $value->image_url;
-                if($imageUrl =! ""){
+                if($imageUrl =! null){
                     $imageUrl = env("APP_URL")."/public/". $imageUrl;
                 }else{
                     $imageUrl = null;

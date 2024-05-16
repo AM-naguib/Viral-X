@@ -1,6 +1,7 @@
 <?php
 use App\Http\Middleware\PremiumPlan;
 use App\Http\Middleware\StandardPlan;
+use App\Models\ScheduledPost;
 use Illuminate\Http\Request;
 use App\Jobs\postScrapingData;
 use App\Http\Middleware\OnlyAdmin;
@@ -36,7 +37,12 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('hi', [HomeController::class, 'hi']);
 
 Route::get("test", function () {
-    return view("front.auth.register");
+    $post = ScheduledPost::findOrFail(1);
+    if($post->image_url == null){
+        dd("null");
+    }else{
+        dd("not null");
+    }
 });
 
 // back routes
