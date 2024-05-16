@@ -20,12 +20,12 @@ class PostInPages implements ShouldQueue
      * Create a new job instance.
      */
 
-     public $user_id;
-     public $pages;
-     public $imageLink;
-     public $content;
+    public $user_id;
+    public $pages;
+    public $imageLink;
+    public $content;
 
-    public function __construct($u,$p,$i,$c)
+    public function __construct($u, $p, $i, $c)
     {
         $this->user_id = $u;
         $this->pages = $p;
@@ -38,13 +38,15 @@ class PostInPages implements ShouldQueue
      */
     public function handle(): void
     {
-        $accountToken = $this->getAccountToken($this->user_id);
+        // $accountToken = $this->getAccountToken($this->user_id);
 
-        $pagesTokens = $this->getPagesToken($this->pages, $accountToken);
+        // $pagesTokens = $this->getPagesToken($this->pages, $accountToken);
 
 
-        $successPosts = $this->makePost($pagesTokens, $this->content, $this->imageLink);
-        $this->saveHistory($successPosts, $this->content,$this->user_id);
+        // $successPosts = $this->makePost($pagesTokens, $this->content, $this->imageLink);
+        // $this->saveHistory($successPosts, $this->content, $this->user_id);
+
+        Log::info("job done");
 
     }
     public function getAccountToken($user_id)
@@ -85,14 +87,15 @@ class PostInPages implements ShouldQueue
                 ]);
                 $success[] = $postResponse->json()['id'];
             } else {
-                $photoId = $this->photoUpload($id, $token, $photoPath);
-                $postResponse = Http::post("https://graph.facebook.com/$id/feed", [
-                    'message' => $message,
-                    'access_token' => $token,
-                    'attached_media' => json_encode([['media_fbid' => $photoId]]),
-                    'published' => true,
-                ]);
-                $success[] = $postResponse->json()['id'];
+                Log::info($photoPath);
+                // $photoId = $this->photoUpload($id, $token, $photoPath);
+                // $postResponse = Http::post("https://graph.facebook.com/$id/feed", [
+                //     'message' => $message,
+                //     'access_token' => $token,
+                //     'attached_media' => json_encode([['media_fbid' => $photoId]]),
+                //     'published' => true,
+                // ]);
+                // $success[] = $postResponse->json()['id'];
 
             }
         }
@@ -102,7 +105,7 @@ class PostInPages implements ShouldQueue
 
 
 
-    public function saveHistory($posts, $content,$user_id)
+    public function saveHistory($posts, $content, $user_id)
     {
 
         foreach ($posts as $post) {
