@@ -38,11 +38,7 @@ Route::get('hi', [HomeController::class, 'hi']);
 
 Route::get("test", function () {
     $post = ScheduledPost::findOrFail(1);
-    if($post->image_url == null){
-        dd("null");
-    }else{
-        dd("not null");
-    }
+    echo Str::length($post->image_url);
 });
 
 // back routes

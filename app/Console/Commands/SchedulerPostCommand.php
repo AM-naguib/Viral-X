@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\AccessToken;
+use Illuminate\Support\Str;
 use App\Models\ScheduledPost;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -36,11 +37,12 @@ class SchedulerPostCommand extends Command
             foreach ($pages as $page) {
                 $token = $this->getPageAccessToken($page->page_id, $page->user_id);
                 $imageUrl = $value->image_url;
-                if($imageUrl =! null){
+                if(Str::length($imageUrl)> 0 ){
                     $imageUrl = env("APP_URL")."/public/". $imageUrl;
                 }else{
                     $imageUrl = null;
                 }
+                Log::info($imageUrl."nego");
                 $this->publishPost($imageUrl, $value->content, $token, $page->page_id);
             }
             $value->status = "done";
@@ -77,7 +79,7 @@ class SchedulerPostCommand extends Command
 
 
         // upload photo without posting it
-
+        Log::info($imageUrl."nego4");
         if ($imageUrl == null) {
             $postResponse = Http::post("https://graph.facebook.com/$page_id/feed", [
                 'message' => $content,
