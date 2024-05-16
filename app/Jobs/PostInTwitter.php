@@ -60,7 +60,6 @@ class PostInTwitter implements ShouldQueue
                     'text' => "$message"
                 ];
             } else {
-                Log::info($imagePath."nego");
                 $image = [];
                 $twitterAuth->setApiVersion("1.1");
                 $media = $twitterAuth->upload('media/upload', ['media' => $imagePath]);

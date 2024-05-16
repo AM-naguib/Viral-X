@@ -25,14 +25,13 @@ class TwitterController extends Controller
         $accounts = $request->accounts;
         if ($request->hasFile("image")) {
             $imagePath = $request->file("image")->store("public");
-            $fullPath = Storage::path($imagePath);
+            $imagePath = Storage::path($imagePath);
 
-            // dd($fullPath);
         }
         $user_id = auth()->user()->id;
 
 
-        PostInTwitter::dispatch($user_id, $accounts, $content, $fullPath);
+        PostInTwitter::dispatch($user_id, $accounts, $content, $imagePath);
         return redirect()->route("admin.history")->with("success", "Posts Sent Successfully");
     }
 
