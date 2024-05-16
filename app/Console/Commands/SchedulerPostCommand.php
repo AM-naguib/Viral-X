@@ -32,10 +32,15 @@ class SchedulerPostCommand extends Command
     {
         $post = ScheduledPost::where("scheduled_at", "<=", now())->where("status", "wating")->get();
         foreach ($post as $value) {
-            $imageUrl = null;
             $pages = $value->fbPages;
             foreach ($pages as $page) {
                 $token = $this->getPageAccessToken($page->page_id, $page->user_id);
+                $imageUrl = $value->image_url;
+                if($imageUrl =! ""){
+                    $imageUrl = env("APP_URL")."/public/". $imageUrl;
+                }else{
+                    $imageUrl = null;
+                }
                 $this->publishPost($imageUrl, $value->content, $token, $page->page_id);
             }
             $value->status = "done";

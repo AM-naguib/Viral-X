@@ -73,6 +73,8 @@ class UserController extends Controller
         ]);
         if (isset($data["password"])) {
             $data["password"] = bcrypt($data["password"]);
+        }else{
+            unset($data["password"]);
         }
         $user->update($data);
         return redirect()->route("admin.users.index")->with("success", "User updated successfully");
