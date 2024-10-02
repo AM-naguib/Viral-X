@@ -77,39 +77,4 @@
             </div>
         </div>
     </div>
-    {{-- <script>
-        window.onload = () => {
-            let formSubmit = document.querySelectorAll('#formSubmit');
-            let form = document.querySelectorAll('#forms');
-            formSubmit.forEach((item, key) => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    let formData = new FormData(form[key]);
-                    let jsonData = {};
-                    formData.forEach((value, key) => {
-                        jsonData[key] = value;
-                    })
-                    let jsonString = JSON.stringify(jsonData);
-                    let xhr = new XMLHttpRequest();
-                    xhr.open("delete", form[key].action);
-                    xhr.setRequestHeader("X-CSRF-TOKEN", form[key]._token.value);
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.setRequestHeader("Accept", "application/json");
-                    xhr.send(jsonString);
-                    xhr.onload = () => {
-                        if (xhr.status == 200) {
-                            item.parentElement.parentElement.remove();
-                            let messageContaner = document.querySelector('#message');
-                            let res = JSON.parse(xhr.responseText);
-                            messageContaner.innerHTML =
-                                `<div class="alert alert-success">${res.message}</div>`
-
-                        }
-                    }
-                })
-
-            })
-
-        }
-    </script> --}}
 @endsection

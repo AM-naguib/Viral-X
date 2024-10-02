@@ -3,7 +3,8 @@
 @section('content')
     <section class="bg-gray-100 dark:bg-gray-900 flex flex-col items-center justify-center min-h-screen py-12">
         <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg max-w-md">
-            <h1 class="text-3xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Code Solutions Refund Policy:</h1>
+            <h1 class="text-3xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Viral-X
+                Refund Policy:</h1>
 
             <p class="text-base text-gray-700 dark:text-gray-300 mb-4">Thank you for choosing our services at Code Solutions. We understand that there may be situations that warrant a refund, so we offer you a flexible refund policy to ensure your comfort and confidence when using our services.</p>
 
